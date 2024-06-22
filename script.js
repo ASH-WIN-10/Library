@@ -1,24 +1,34 @@
-// function Book(bookName, authorName, pages, read) {
-  // this.bookName = bookName;
-  // this.authorName = authorName;
-  // this.pages = pages;
-  // this.read = read;
+const myLibrary = [];
 
-  // this.info = function () {
-  //   let readInfo = "Read it.";
-  //   if (!this.read) readInfo = "Not read it, yet.";
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
 
-  //   const bookInfo = `${this.bookName} by ${this.authorName}; ${this.pages} pages; ${readInfo}`;
-  //   return bookInfo;
-  // };
-// }
 
-// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-// console.log(theHobbit.info());
+// Dialog
 
 const addBookDialog = document.querySelector('.addBook');
 const addBtn = document.querySelector('header > button');
 
 addBtn.addEventListener('click', () => {
   addBookDialog.showModal();
+});
+
+// Form
+
+const addBookForm = document.querySelector('form');
+
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const pages = document.getElementById('pages').value;
+  const read = document.getElementById('read').checked;
+
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
 });

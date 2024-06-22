@@ -92,7 +92,7 @@ dialog {
     outline: none;
     border: none;
     border-radius: 20px;
-    padding: 25px 40px;
+    padding: 24px 42px;
 }
 
 dialog::backdrop {
