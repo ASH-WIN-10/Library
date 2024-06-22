@@ -7,10 +7,6 @@ class Book {
     this.pages = pages;
     this.read = read;
   }
-
-  // info() {
-  //   return `${this.title}, ${this.author}, ${this.pages}, ${this.read}`
-  // }
 }
 
 function addBookToLibrary(e) {
@@ -21,8 +17,8 @@ function addBookToLibrary(e) {
   const pages = document.getElementById('pages').value;
   const read = document.getElementById('read').checked;
 
-  const newBook = new Book(title, author, pages, read);
-  // const newBook = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+  // const newBook = new Book(title, author, pages, read);
+  const newBook = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
   books.push(newBook);
   showBooks();
 
@@ -33,12 +29,17 @@ function addBookToLibrary(e) {
 function showBooks() {
   const library = document.querySelector('main');
   const bookCard = document.createElement('div');
+  bookCard.className = "card"
   books.forEach(book => {
     bookCard.innerHTML = `
-    <span>${book.title}</span>
-    <div>
-      <button>Not Complete</button>
-      <button>Remove</button>
+    <div class="info">
+      <span><b>Title: </b>${book.title}</span>
+      <span><b>Author: </b>${book.author}</span>
+      <span><b>Pages: </b>${book.pages}</span>
+    </div>
+    <div class="btns">
+      <button id="readStatusBtn">Not Complete</button>
+      <button id="removeBtn">Remove</button>
     </div>
     `;
     library.appendChild(bookCard);

@@ -4,8 +4,9 @@
     --primary-bg-color: #0f172a;
     --secondary-bg-color: #334155;
     --dimmed-bg-color: #475569;
-    --input-bg-color: #cbd5e1;
     --light-bg-color: #f1f5f9;
+    --red-bg-color: #dc2626;
+    --dimmed-red-color: #f14e4e;
 }
 
 body {
@@ -89,9 +90,6 @@ button > img {
     transition: all 250ms;
 }
 
-main {
-    background-color: var(--light-bg-color);
-}
 
 dialog {
     outline: none;
@@ -101,7 +99,8 @@ dialog {
 }
 
 dialog::backdrop {
-    backdrop-filter: blur(3px);
+    background-color: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 form {
@@ -134,7 +133,66 @@ input:not([type="checkbox"]) {
     border: none;
     outline: none;
     border-radius: 100vw;
-    background-color: var(--input-bg-color);
+    background-color: var(--light-bg-color);
     font-size: 1.1rem;
     padding: 4px 8px;
+}
+
+
+main {
+    padding: 64px;
+    background-color: var(--light-bg-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
+    justify-content: center;
+    gap: 32px;
+}
+
+.card {
+    background-color: white;
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    height: max-content;
+    padding: 32px;
+    font-size: 1.3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btns button {
+    font-size: 1.05rem;
+    flex: auto;
+}
+
+#readStatusBtn {
+    --bg-color: var(--dimmed-bg-color);
+    --hov-bg-color: rgba(71, 85, 105, 0.85);
+
+    background-color: var(--bg-color);
+}
+
+#readStatusBtn:hover {
+    background-color: var(--hov-bg-color);
+}
+
+#removeBtn {
+    background-color: var(--red-bg-color);
+}
+
+#removeBtn:hover {
+    background-color: var(--dimmed-red-color);
 }
