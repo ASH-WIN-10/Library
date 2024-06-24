@@ -120,3 +120,10 @@ addBookForm.addEventListener('submit', addBookToLibrary);
 
 // Checks if Main has any children and adds a placeholder if it doesn't
 placeholderInMain();
+
+
+// Close button for the dialog
+const closeBtn = document.querySelector('#closeBtn');
+closeBtn.addEventListener('click', () => {
+  addBookDialog.close();
+});

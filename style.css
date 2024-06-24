@@ -96,7 +96,6 @@ dialog {
     outline: none;
     border: none;
     border-radius: 20px;
-    padding: 24px 42px;
 }
 
 dialog::backdrop {
@@ -105,6 +104,8 @@ dialog::backdrop {
 }
 
 form {
+    padding: 24px 42px;
+    padding-block-start: 0px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -227,4 +228,12 @@ main {
     text-align: center;
     font-size: 3rem;
     font-weight: 900;
+}
+
+#closeBtn {
+    background-color: white;
+}
+
+#closeBtn > img {
+    height: 2em;
 }
