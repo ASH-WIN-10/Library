@@ -59,6 +59,10 @@ function showBooks(newBook) {
     e.target.classList.toggle('read');
     newBook.updateReadStatus();
   });
+
+  removeBtn.addEventListener('click', () => {
+    library.removeChild(bookCard);
+  })
 }
 
 // Dialog
