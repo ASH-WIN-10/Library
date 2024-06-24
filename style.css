@@ -175,7 +175,7 @@ main {
 
 .btns button {
     font-size: 1.05rem;
-    flex: auto;
+    flex: 1 1 max-content;
 }
 
 .btns :first-child {
