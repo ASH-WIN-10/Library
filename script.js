@@ -12,6 +12,13 @@ class Book {
   updateReadStatus() {
     this.read = !this.read;
   }
+
+  readBtnClassName() {
+    if (this.read === true)
+      return "read"
+    else
+      return
+  }
 }
 
 
@@ -32,7 +39,7 @@ function addBookToLibrary(e) {
 }
 
 
-function showBooks(newBook) {
+function showBooks(book) {
   const library = document.querySelector('main');
   const bookCard = document.createElement('div');
   bookCard.className = "card"
@@ -42,16 +49,19 @@ function showBooks(newBook) {
   const infoDiv = document.createElement('div');
   infoDiv.className = "info";
   infoDiv.innerHTML = `
-    <span><b>Title: </b>${newBook.title}</span>
-    <span><b>Author: </b>${newBook.author}</span>
-    <span><b>Pages: </b>${newBook.pages}</span>
+    <span><b>Title: </b>${book.title}</span>
+    <span><b>Author: </b>${book.author}</span>
+    <span><b>Pages: </b>${book.pages}</span>
   `;
 
   const btnsDiv = document.createElement('div');
   const readBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
   btnsDiv.className = "btns"
+
   readBtn.id = "readBtn";
+  readBtn.className = book.readBtnClassName();
+
   removeBtn.id = "removeBtn";
   removeBtn.textContent = "Remove";
   btnsDiv.append(readBtn, removeBtn);
@@ -63,7 +73,7 @@ function showBooks(newBook) {
   // Read Button logic
   readBtn.addEventListener('click', (e) => {
     e.target.classList.toggle('read');
-    newBook.updateReadStatus();
+    book.updateReadStatus();
   });
 
 
