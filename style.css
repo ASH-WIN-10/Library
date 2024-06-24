@@ -179,9 +179,9 @@ main {
     flex: 1;
 }
 
-@media(max-width: 360px) {
-    .btns button {
-        flex: auto;
+@media(max-width: 356px) {
+    .btns {
+        flex-direction: column;
     }
 }
 
@@ -220,4 +220,11 @@ main {
 
 #removeBtn:hover {
     background-color: var(--dimmed-red-color);
+}
+
+.empty {
+    align-self: center;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
 }

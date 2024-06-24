@@ -15,9 +15,25 @@ class Book {
 
   readBtnClassName() {
     if (this.read === true)
-      return "read"
+      return "read";
     else
-      return
+      return;
+  }
+}
+
+
+function placeholderInMain() {
+  const main = document.querySelector('main');
+  
+  if (main.hasChildNodes() === false) {
+    const placeholder = document.createElement('div');
+    placeholder.className = "empty";
+    placeholder.textContent = "Empty";
+    main.appendChild(placeholder);
+  }
+  else if (main.childNodes[0].className === "empty") {
+    const placeholder = document.querySelector('.empty');
+    main.removeChild(placeholder);
   }
 }
 
@@ -36,13 +52,15 @@ function addBookToLibrary(e) {
   
   addBookForm.reset();
   addBookDialog.close();
+
+  placeholderInMain();
 }
 
 
 function showBooks(book) {
   const library = document.querySelector('main');
   const bookCard = document.createElement('div');
-  bookCard.className = "card"
+  bookCard.className = "card";
 
 
   // Creating and adding elements in the Book Card
@@ -57,7 +75,7 @@ function showBooks(book) {
   const btnsDiv = document.createElement('div');
   const readBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
-  btnsDiv.className = "btns"
+  btnsDiv.className = "btns";
 
   readBtn.id = "readBtn";
   readBtn.className = book.readBtnClassName();
@@ -80,7 +98,9 @@ function showBooks(book) {
   // Remove Button logic
   removeBtn.addEventListener('click', () => {
     library.removeChild(bookCard);
+    placeholderInMain();
   });
+
 }
 
 
@@ -96,3 +116,7 @@ addBtn.addEventListener('click', () => {
 // Form
 const addBookForm = document.querySelector('form');
 addBookForm.addEventListener('submit', addBookToLibrary);
+
+
+// Checks if Main has any children and adds a placeholder if it doesn't
+placeholderInMain();
