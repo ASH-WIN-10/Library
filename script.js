@@ -7,42 +7,57 @@ class Book {
     this.pages = pages;
     this.read = read;
   }
+
+  updateReadStatus() {
+    this.read = !this.read;
+  }
 }
 
 function addBookToLibrary(e) {
   e.preventDefault();
-
+  
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
   const read = document.getElementById('read').checked;
-
-  // const newBook = new Book(title, author, pages, read);
-  const newBook = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+  
+  const newBook = new Book(title, author, pages, read);
   books.push(newBook);
-  showBooks();
-
+  showBooks(newBook);
+  
   addBookForm.reset();
   addBookDialog.close();
 }
 
-function showBooks() {
+function showBooks(newBook) {
   const library = document.querySelector('main');
   const bookCard = document.createElement('div');
   bookCard.className = "card"
-  books.forEach(book => {
-    bookCard.innerHTML = `
-    <div class="info">
-      <span><b>Title: </b>${book.title}</span>
-      <span><b>Author: </b>${book.author}</span>
-      <span><b>Pages: </b>${book.pages}</span>
-    </div>
-    <div class="btns">
-      <button id="readStatusBtn">Not Complete</button>
-      <button id="removeBtn">Remove</button>
-    </div>
-    `;
-    library.appendChild(bookCard);
+
+  const infoDiv = document.createElement('div');
+  infoDiv.className = "info";
+  infoDiv.innerHTML = `
+    <span><b>Title: </b>${newBook.title}</span>
+    <span><b>Author: </b>${newBook.author}</span>
+    <span><b>Pages: </b>${newBook.pages}</span>
+  `;
+
+  const btnsDiv = document.createElement('div');
+  const readBtn = document.createElement('button');
+  const removeBtn = document.createElement('button');
+  btnsDiv.className = "btns"
+  readBtn.id = "readBtn";
+  removeBtn.id = "removeBtn";
+  removeBtn.textContent = "Remove";
+  btnsDiv.append(readBtn, removeBtn);
+
+  bookCard.append(infoDiv, btnsDiv);
+
+  library.appendChild(bookCard);
+
+  readBtn.addEventListener('click', (e) => {
+    e.target.classList.toggle('read');
+    newBook.updateReadStatus();
   });
 }
 

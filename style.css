@@ -158,7 +158,7 @@ main {
 
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
 }
 
 .info {
@@ -178,15 +178,33 @@ main {
     flex: auto;
 }
 
-#readStatusBtn {
-    --bg-color: var(--dimmed-bg-color);
-    --hov-bg-color: rgba(71, 85, 105, 0.85);
-
-    background-color: var(--bg-color);
+.btns :first-child {
+    --hover-bg-color: rgba(71, 85, 105, 0.85);
+    background-color: var(--dimmed-bg-color);
+    
+    &:hover {
+        background-color: var(--hover-bg-color);
+    }
+    
+    &::before {
+        content: "Not Read";
+    }
 }
 
-#readStatusBtn:hover {
-    background-color: var(--hov-bg-color);
+.read {
+    background-color: #16a34a !important;
+    
+    &:hover {
+        background-color: #15803d !important;
+    }
+
+    &::before {
+        display: none;
+    }
+
+    &::after {
+        content: "Read";
+    }
 }
 
 #removeBtn {
