@@ -1,5 +1,6 @@
 const books = [];
 
+
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -12,6 +13,7 @@ class Book {
     this.read = !this.read;
   }
 }
+
 
 function addBookToLibrary(e) {
   e.preventDefault();
@@ -29,11 +31,14 @@ function addBookToLibrary(e) {
   addBookDialog.close();
 }
 
+
 function showBooks(newBook) {
   const library = document.querySelector('main');
   const bookCard = document.createElement('div');
   bookCard.className = "card"
 
+
+  // Creating and adding elements in the Book Card
   const infoDiv = document.createElement('div');
   infoDiv.className = "info";
   infoDiv.innerHTML = `
@@ -52,21 +57,24 @@ function showBooks(newBook) {
   btnsDiv.append(readBtn, removeBtn);
 
   bookCard.append(infoDiv, btnsDiv);
-
   library.appendChild(bookCard);
 
+
+  // Read Button logic
   readBtn.addEventListener('click', (e) => {
     e.target.classList.toggle('read');
     newBook.updateReadStatus();
   });
 
+
+  // Remove Button logic
   removeBtn.addEventListener('click', () => {
     library.removeChild(bookCard);
-  })
+  });
 }
 
-// Dialog
 
+// Dialog
 const addBookDialog = document.querySelector('.addBook');
 const addBtn = document.querySelector('header > button');
 
@@ -74,7 +82,7 @@ addBtn.addEventListener('click', () => {
   addBookDialog.showModal();
 });
 
-// Form
 
+// Form
 const addBookForm = document.querySelector('form');
 addBookForm.addEventListener('submit', addBookToLibrary);
