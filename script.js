@@ -1,71 +1,59 @@
-const books = [];
-
+const library = [];
 
 class Book {
-  constructor(title, author, pages, read) {
+  constructor(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.isRead = isRead;
   }
 
-  updateReadStatus() {
-    this.read = !this.read;
+  toggleReadStatus() {
+    this.isRead = !this.isRead;
   }
 
-  readBtnClassName() {
-    if (this.read === true)
-      return "read";
-    else
-      return;
+  getReadStatusClass() {
+    return this.isRead ? 'read' : '';
   }
 }
 
-
-function placeholderInMain() {
+function renderPlaceholder() {
   const main = document.querySelector('main');
-  
-  if (main.hasChildNodes() === false) {
+
+  if (!main.hasChildNodes()) {
     const placeholder = document.createElement('div');
-    placeholder.className = "empty";
-    placeholder.textContent = "Empty";
+    placeholder.className = 'empty';
+    placeholder.textContent = 'Empty';
     main.appendChild(placeholder);
-  }
-  else if (main.childNodes[0].className === "empty") {
-    const placeholder = document.querySelector('.empty');
-    main.removeChild(placeholder);
+  } else if (main.childNodes[0].className === 'empty') {
+    main.removeChild(main.childNodes[0]);
   }
 }
 
+function addBook(event) {
+  event.preventDefault();
 
-function addBookToLibrary(e) {
-  e.preventDefault();
-  
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const pages = document.getElementById('pages').value;
-  const read = document.getElementById('read').checked;
-  
-  const newBook = new Book(title, author, pages, read);
-  books.push(newBook);
-  showBooks(newBook);
-  
-  addBookForm.reset();
-  addBookDialog.close();
+  const isRead = document.getElementById('read').checked;
 
-  placeholderInMain();
+  const newBook = new Book(title, author, pages, isRead);
+  library.push(newBook);
+  renderBook(newBook);
+
+  document.getElementById('addBookForm').reset();
+  document.querySelector('.addBook').close();
+
+  renderPlaceholder();
 }
 
-
-function showBooks(book) {
-  const library = document.querySelector('main');
+function renderBook(book) {
   const bookCard = document.createElement('div');
-  bookCard.className = "card";
+  bookCard.className = 'card';
 
-
-  // Creating and adding elements in the Book Card
   const infoDiv = document.createElement('div');
-  infoDiv.className = "info";
+  infoDiv.className = 'info';
   infoDiv.innerHTML = `
     <span><b>Title: </b>${book.title}</span>
     <span><b>Author: </b>${book.author}</span>
@@ -75,55 +63,41 @@ function showBooks(book) {
   const btnsDiv = document.createElement('div');
   const readBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
-  btnsDiv.className = "btns";
+  btnsDiv.className = 'btns';
 
-  readBtn.id = "readBtn";
-  readBtn.className = book.readBtnClassName();
+  readBtn.id = 'readBtn';
+  readBtn.className = book.getReadStatusClass();
 
-  removeBtn.id = "removeBtn";
-  removeBtn.textContent = "Remove";
+  removeBtn.id = 'removeBtn';
+  removeBtn.textContent = 'Remove';
   btnsDiv.append(readBtn, removeBtn);
 
   bookCard.append(infoDiv, btnsDiv);
-  library.appendChild(bookCard);
+  document.querySelector('main').appendChild(bookCard);
 
-
-  // Read Button logic
-  readBtn.addEventListener('click', (e) => {
-    e.target.classList.toggle('read');
-    book.updateReadStatus();
+  readBtn.addEventListener('click', () => {
+    readBtn.classList.toggle('read');
+    book.toggleReadStatus();
   });
 
-
-  // Remove Button logic
   removeBtn.addEventListener('click', () => {
-    library.removeChild(bookCard);
-    placeholderInMain();
+    document.querySelector('main').removeChild(bookCard);
+    renderPlaceholder();
   });
-
 }
 
-
 // Dialog
-const addBookDialog = document.querySelector('.addBook');
-const addBtn = document.querySelector('header > button');
-
-addBtn.addEventListener('click', () => {
-  addBookDialog.showModal();
+document.querySelector('header > button').addEventListener('click', () => {
+  document.querySelector('.addBook').showModal();
 });
-
 
 // Form
-const addBookForm = document.querySelector('form');
-addBookForm.addEventListener('submit', addBookToLibrary);
-
-
-// Checks if Main has any children and adds a placeholder if it doesn't
-placeholderInMain();
-
+document.getElementById('addBookForm').addEventListener('submit', addBook);
 
 // Close button for the dialog
-const closeBtn = document.querySelector('#closeBtn');
-closeBtn.addEventListener('click', () => {
-  addBookDialog.close();
+document.getElementById('closeBtn').addEventListener('click', () => {
+  document.querySelector('.addBook').close();
 });
+
+renderPlaceholder();
+
